@@ -48,6 +48,7 @@ public class PeopleController {
         model.addAttribute("person", personDAO.show(id));
 
         return "people/show";
+
     }
 
 
