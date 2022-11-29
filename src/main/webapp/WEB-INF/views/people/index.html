@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org" xmlns:h="">
+<head>
+    <meta charset="UTF-8">
+    <link href="resources/css/css.css" rel="stylesheet" type="text/css" />
+
+
+    <title>All People</title>
+</head>
+<body>
+<h1>List All people</h1>
+<table class="table-first" style=" width: 100%;">
+    <thead>
+    <tr>
+        <th style="width:10%;">ID</th>
+        <th style="width:30%;">Name</th>
+        <th style="width:10%;">Age</th>
+        <th style="width:30%;">Email</th>
+        <th style="width:20%;">Link</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="person : ${people}">
+        <td th:text="${person.getId()}">value</td>
+        <td th:text="${person.getName()}">value</td>
+        <td th:text="${person.getAge()}">value</td>
+        <td th:text="${person.getEmail()}">value</td>
+        <td><a th:text="'more about ' + ${person.getName()}" th:href="@{/people/{id} (id=${person.getId()})}">value</a></td>
+    </tr>
+    </tbody>
+</table>
+
+
+<br/>
+<hr/>
+<a href="/people/new" class="gradient-button">Crate new person</a>
+</body>
+</html>
