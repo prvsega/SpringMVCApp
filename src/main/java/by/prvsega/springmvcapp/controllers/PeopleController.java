@@ -23,16 +23,6 @@ public class PeopleController {
 
 
 
-
-
-
-
-
-
-
-
-
-
     @GetMapping()
     public String index(Model model) { // Передаем модель, чтобы передать объект людей на представление
 
