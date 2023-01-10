@@ -12,6 +12,7 @@
 <p th:text="'ID: ' + ${person.getId()}">VALUE</p>
 <p th:text="'Age: ' + ${person.getAge()}">VALUE</p>
 <p th:text="'Email: ' + ${person.getEmail()}">VALUE</p>
+<p th:text="'Address: ' + ${person.getAddress()}">VALUE</p>
 <br/>
 <a th:href="@{/people/{id}/edit(id=${person.getId()})}">
     <span  class="gradient-button">Edit</span></a>

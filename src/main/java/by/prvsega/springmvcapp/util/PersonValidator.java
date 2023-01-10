@@ -1,7 +1,7 @@
 package by.prvsega.springmvcapp.util;
 
 import by.prvsega.springmvcapp.dao.PersonDAO;
-import by.prvsega.springmvcapp.model.Person;
+import by.prvsega.springmvcapp.models.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
@@ -26,9 +26,9 @@ public class PersonValidator implements Validator {
     public void validate(Object o, Errors errors) {
         Person person = (Person) o;
 
-        if (personDAO.show(person.getEmail()) != null){
-            errors.rejectValue("email", "", "This email isn't unique");
-        }
+//        if (personDAO.show(person.getEmail()) != null){
+//            errors.rejectValue("email", "", "This email isn't unique");
+//        }
 
 
     }

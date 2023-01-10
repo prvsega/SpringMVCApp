@@ -1,32 +1,46 @@
-package by.prvsega.springmvcapp.model;
+package by.prvsega.springmvcapp.models;
 
 
-import javax.validation.Valid;
+import javax.persistence.*;
 import javax.validation.constraints.*;
-//@Entity
+
+@Entity
+@Table(name = "Person")
 public class Person {
-//    @Id
-//    @GeneratedValue
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private int id;
+
+    @Column(name = "name")
     @NotEmpty(message = "Name should not be empty")
     @Size(min = 2, max = 30, message = "Name should be between 2 and 30 characters")
     private String name;
+
+    @Column(name = "age")
     @Min(value = 0, message = "Age should be geater than 0")
     private int age;
+
+    @Column(name = "email")
     @NotEmpty(message = "Email should not be empty")
     @Email(message = "Email should be valid")
     @Pattern(regexp = "^((?!\\.)[\\w-_.]*[^.])(@\\w+)(\\.\\w+(\\.\\w+)?[^.\\W])$", message = "Not correct. For Example: seo@seo.by")
     private String email;
 
+    @Column(name = "address")
+    @NotEmpty(message = "Address should not be empty")
+    //Country, City, Index 6 characters
+    @Pattern(regexp = "[A-Z]\\w+, [A-Z]\\w+, \\d{6}", message = "You want write correct address - Country, City, Index 6 characters")
+    private String address;
 
-    public Person() {
-    }
+    public Person() {}
 
-    public Person(int id, String name, int age, String email) {
-        this.id = id;
+    public Person(String name, int age, String email, String address) {
+
         this.name = name;
         this.age = age;
         this.email = email;
+        this.address = address;
     }
 
     public int getId() {
@@ -59,5 +73,13 @@ public class Person {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 }

@@ -1,7 +1,8 @@
 package by.prvsega.springmvcapp.controllers;
 
 import by.prvsega.springmvcapp.dao.PersonDAO;
-import by.prvsega.springmvcapp.model.Person;
+import by.prvsega.springmvcapp.models.Person;
+import by.prvsega.springmvcapp.util.PersonValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,10 +16,12 @@ import javax.validation.Valid;
 public class PeopleController {
 
     private final PersonDAO personDAO;
+    private final PersonValidator personValidator;
 
     @Autowired
-    public PeopleController(PersonDAO personDAO) {
+    public PeopleController(PersonDAO personDAO, PersonValidator personValidator) {
         this.personDAO = personDAO;
+        this.personValidator = personValidator;
     }
 
 
@@ -50,6 +53,9 @@ public class PeopleController {
     @PostMapping()
     public String create(@ModelAttribute("person") @Valid Person person
             , BindingResult bindingResult) {
+
+        personValidator.validate(person, bindingResult);
+
         if (bindingResult.hasErrors()) {
             return "people/new";
         }
@@ -70,6 +76,7 @@ public class PeopleController {
     @PatchMapping("/{id}")
     public String update(@ModelAttribute("person") @Valid Person person, BindingResult bindingResult,
                          @PathVariable("id") int id) {
+        personValidator.validate(person, bindingResult);
         if (bindingResult.hasErrors()) {
             return "people/edit";
         }
@@ -88,12 +95,12 @@ public class PeopleController {
     }
 
 
-    @GetMapping("/search")
-    public String searchPerson(Model model, String string) {
-        model.addAttribute("person", personDAO.search(string));
-
-        return "people/search";
-    }
+//    @GetMapping("/search")
+//    public String searchPerson(Model model, String string) {
+//        model.addAttribute("person", personDAO.search(string));
+//
+//        return "people/search";
+//    }
 
 
 
